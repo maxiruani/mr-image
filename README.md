@@ -4,7 +4,7 @@ Simple image select, crop and draw Angular.js directive.
 
 ### Features:
 
- * Lightweight. Just (7.68 Kb (js) + 2.79 Kb (css) = 10.47 Kb) minified.
+ * Lightweight. Just 7.68 Kb .js + 2.79 Kb .css = `10.47 Kb` minified.
  * Native. No need of jQuery.
  * Customizable style.
  * Make image selection and get coordinates.
