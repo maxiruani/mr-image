@@ -94,34 +94,30 @@ Optional. Max width of image. The image will scale to adjust.
 
 ### mr-selector
 
-Selector  | Object
---------- | ---------
-Properties|
---------- | ---------
-x1        | Coordinate x1
-y1        | Coordinate y1
-x2        | Coordinate x2
-y2        | Coordinate y2
-enabled   | Default: `true`
---------- | ---------
-Methods   |
---------- | ---------
-.clear()  | Clear the selection
-.crop()   | Crop the selection, returns image as data url
+Selector       | Object
+-------------- | -------------
+**Properties** |
+x1             | Coordinate x1
+y1             | Coordinate y1
+x2             | Coordinate x2
+y2             | Coordinate y2
+enabled        | Default: `true`
+**Methods**    |
+.clear()       | Clear the selection
+.crop()        | Crop the selection, returns image as data url
 
 
 ### mr-drawer
 
-Drawer    | Array
---------- | ---------
-Array Item|
---------- | ---------
-x1        | Coordinate x1
-y1        | Coordinate y1
-x2        | Coordinate x2
-y2        | Coordinate y2
-color     | Color of border and background
-stroke    | Border stroke
+Drawer         | Array
+-------------  | ---------
+**Array Item** |
+x1             | Coordinate x1
+y1             | Coordinate y1
+x2             | Coordinate x2
+y2             | Coordinate y2
+color          | Color of border and background
+stroke         | Border stroke
 
 # License
 
