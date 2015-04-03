@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html ng-app="DemoApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MR-IMAGE</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mr-image.min.css">
+    <link rel="stylesheet" href="css/demo.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+    <script src="js/mr-image.min.js"></script>
+
+    <script>
+        var app = angular.module('DemoApp', ['mrImage']);
+
+        app.controller('DemoCtrl', ['$scope', function ($scope) {
+
+            $scope.image = {
+                src: 'assets/times.jpg',
+                maxWidth: 938
+            };
+
+            $scope.selector = {};
+
+            $scope.drawer = [
+                { x1: 625, y1: 154, x2: 777, y2: 906, color: '#337ab7', stroke: 1 },
+                { x1: 778, y1: 154, x2: 924, y2: 906, color: '#3c763d', stroke: 1 },
+                { x1: 172, y1: 566, x2: 624, y2: 801, color: '#a94442', stroke: 1 }
+            ];
+
+            $scope.rect = {
+                color: '#337ab7',
+                stroke: 3
+            };
+
+            $scope.addRect = function () {
+                $scope.drawer.push({
+                    x1: $scope.selector.x1,
+                    y1: $scope.selector.y1,
+                    x2: $scope.selector.x2,
+                    y2: $scope.selector.y2,
+                    color: $scope.rect.color,
+                    stroke: $scope.rect.stroke
+                });
+                $scope.selector.clear();
+            };
+
+            $scope.removeRect = function (index) {
+                $scope.drawer.splice(index, 1);
+            };
+
+            $scope.cropRect = function () {
+                $scope.result = $scope.selector.crop();
+            };
+
+            $scope.colors = {
+                '#337ab7': 'active',
+                '#3c763d': 'success',
+                '#31708f': 'info',
+                '#8a6d3b': 'warning',
+                '#a94442': 'danger'
+            };
+
+        }]);
+
+    </script>
+</head>
+<body>
+    <div class="container" ng-controller="DemoCtrl">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">MR-IMAGE</a>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="row">
+
+            <div class="col-xs-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <div class="form">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label> x1: </label>
+                                    <input type="number" class="form-control" placeholder="x1" ng-model="selector.x1">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label> y1: </label>
+                                    <input type="number" class="form-control" placeholder="y1" ng-model="selector.y1">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label> x2: </label>
+                                    <input type="number" class="form-control" placeholder="x2" ng-model="selector.x2">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label> y2: </label>
+                                    <input type="number" class="form-control" placeholder="y2" ng-model="selector.y2">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" ng-click="addRect()" ng-disabled="selector.x1 == undefined">Add Rectangle</button>
+                        <button class="btn btn-info" ng-click="cropRect()" ng-disabled="selector.x1 == undefined">Crop Rectangle</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-block {{ selector.enabled ? 'btn-warning' : 'btn-success' }}" ng-click="selector.enabled = !selector.enabled">
+                                        {{ selector.enabled ? 'Disable' : 'Enable' }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-block btn-danger" ng-click="selector.clear()">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Color: </label>
+                                <div class="form-group">
+                                    <label class="radio-inline text-primary">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" ng-model="rect.color" value="#337ab7">
+                                        Primary
+                                    </label>
+                                    <label class="radio-inline text-success">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" ng-model="rect.color" value="#3c763d">
+                                        Success
+                                    </label>
+                                    <label class="radio-inline text-info">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios3" ng-model="rect.color" value="#31708f">
+                                        Info
+                                    </label>
+                                    <label class="radio-inline text-danger">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios4" ng-model="rect.color" value="#a94442">
+                                        Danger
+                                    </label>
+                                    <label class="radio-inline text-warning">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios5" ng-model="rect.color" value="#8a6d3b">
+                                        Warning
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label> Stroke: </label>
+                                <input type="number" class="form-control" placeholder="Stroke" ng-model="rect.stroke">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <div class="panel panel-default">
+                    <table class="table table-condensed table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>x1</th>
+                                <th>y1</th>
+                                <th>x2</th>
+                                <th>y2</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="rect in drawer">
+                                <td class="{{colors[rect.color]}}">{{$index}}</td>
+                                <td>{{rect.x1}}</td>
+                                <td>{{rect.y1}}</td>
+                                <td>{{rect.x2}}</td>
+                                <td>{{rect.y2}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-danger" ng-click="removeRect($index)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div mr-image mr-src="image.src" mr-max-width="image.maxWidth" mr-selector="selector" mr-drawer="drawer"></div>
+
+        <div class="well well-sm text-center" style="margin-top: 20px">
+            MR-IMAGE Demo page
+        </div>
+
+        <img ng-src="{{result}}">
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "mr-image",
+  "version": "0.0.1",
+  "authors": [
+    "Maximiliano Ruani <maxi.ruani91@googlemail.com>"
+  ],
+  "description": "Simple image select, crop and draw Angular.js directive.",
+  "main": [
+    "dist/js/mr-image.min.js",
+    "dist/css/mr-image.css"
+  ],
+  "keywords": [
+    "angular",
+    "image",
+    "crop",
+    "cropper",
+    "draw",
+    "drawer",
+    "select",
+    "selector"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/maxiruani/mr-image",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
