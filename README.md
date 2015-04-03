@@ -111,13 +111,13 @@ enabled        | Default: `true`
 
 Drawer         | Array
 -------------  | ---------
-**Array Item** |
+**Array Item** | **Object**
 x1             | Coordinate x1
 y1             | Coordinate y1
 x2             | Coordinate x2
 y2             | Coordinate y2
-color          | Color of border and background
-stroke         | Border stroke
+color          | Color of border and background. Example: `#333`
+stroke         | Border stroke. Number. Example: `1`
 
 # License
 
