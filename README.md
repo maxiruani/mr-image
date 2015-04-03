@@ -4,11 +4,11 @@ Simple image select, crop and draw Angular.js directive.
 
 ### Features:
 
- * Lightweight.
+ * Lightweight. Just (7.68 Kb (js) + 2.79 Kb (css) = 10.47 Kb) minified.
  * Native. No need of jQuery.
  * Customizable style.
- * Crop images.
  * Make image selection and get coordinates.
+ * Crop images.
  * Draw squares on image.
 
 # Screenshots:
@@ -19,7 +19,7 @@ Simple image select, crop and draw Angular.js directive.
 
 # Installation
 
-Installation is easy, MR-IMAGE has minimal dependencies - only the AngularJS is required.
+Installation is easy, MR-IMAGE has minimal dependencies - only AngularJS is required.
 
 ### Install with Bower
 ```sh
@@ -41,7 +41,8 @@ angular.module('myModule', ['mrImage']);
 # Example
 
 ```html
-<div mr-image mr-src="image.src" mr-max-width="image.maxWidth" mr-selector="selector" mr-drawer="drawer"></div>
+<div mr-image mr-src="image.src" mr-max-width="image.maxWidth"
+     mr-selector="selector" mr-drawer="drawer"></div>
 
 <img ng-src="{{cropResult}}">
 ```
@@ -95,7 +96,7 @@ Optional. Max width of image. The image will scale to adjust.
 
 Selector  | Object
 --------- | ---------
-Properties
+Properties|
 --------- | ---------
 x1        | Coordinate x1
 y1        | Coordinate y1
@@ -103,7 +104,7 @@ x2        | Coordinate x2
 y2        | Coordinate y2
 enabled   | Default: `true`
 --------- | ---------
-Methods
+Methods   |
 --------- | ---------
 .clear()  | Clear the selection
 .crop()   | Crop the selection, returns image as data url
@@ -113,7 +114,7 @@ Methods
 
 Drawer    | Array
 --------- | ---------
-Array Item
+Array Item|
 --------- | ---------
 x1        | Coordinate x1
 y1        | Coordinate y1
@@ -126,4 +127,4 @@ stroke    | Border stroke
 
 See the [LICENSE](https://github.com/maxiruani/mr-image/blob/master/LICENSE) file.
 
-# Author: [Maximiliano Ruani](http://github.com/maxiruani)
+#### Author: [Maximiliano Ruani](http://github.com/maxiruani)
