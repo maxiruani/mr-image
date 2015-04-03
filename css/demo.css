@@ -6,3 +6,19 @@ body {
 .container {
     width: 970px !important;
 }
+
+.demo-navbar-btn {
+    margin: 10px 10px 0 0;
+}
+
+.demo-navbar li {
+    padding-top: 10px;
+}
+
+.demo-navbar .star,.demo-navbar .fork {
+    width: 120px;
+}
+
+.demo-navbar .follow {
+    width: 195px;
+}
