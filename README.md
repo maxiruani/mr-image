@@ -10,6 +10,7 @@ Simple image select, crop and draw Angular.js directive.
  * Make image selection and get coordinates.
  * Crop images.
  * Draw squares on image.
+ * Aspect ratio.
 
 # Screenshots:
 
@@ -91,6 +92,9 @@ Image source. URL.
 
 ### mr-max-width
 Optional. Max width of image. The image will scale to adjust.
+
+### mr-aspect-ratio
+Optional. Decimal. Aspect ratio of w/h (e.g. `1` for square).
 
 ### mr-selector
 
