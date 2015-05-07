@@ -22,13 +22,15 @@ app.directive('mrImageSelector', function(){
         restrict: 'A',
         scope: {
             selector: '=?mrModel',
-            src: '=?mrSrc'
+            src: '=?mrSrc',
+            aspectRatio: '=?mrAspectRatio'
         },
         link: function(scope, element) {
 
             scope.selector = scope.selector || {};
 
             var selector = scope.selector;
+            var aspectRatio = scope.aspectRatio;
 
             var $document = angular.element(document);
 
@@ -259,6 +261,43 @@ app.directive('mrImageSelector', function(){
                 position.left   = position.left   < 0 ?  0 : position.left;
                 position.right  = position.right  < 0 ?  0 : position.right;
 
+                if (aspectRatio) {
+                    if (type == 'n') {
+                        position.left = width - (position.right + (height - position.top - position.bottom) * aspectRatio);
+                    }
+                    if (type == 's') {
+                        position.right = width - (position.left + (height - position.top - position.bottom) * aspectRatio);
+                    }
+                    if (type == 'w' || type == 'nw' || type == 'ne') {
+                        position.top = height - (position.bottom + (width - position.left - position.right) / aspectRatio);
+
+                        if (position.top < 0) {
+                            position.top = 0;
+
+                            if (type[0] == 'w' || type[1] == 'w') {
+                                position.left = width - (position.right + (height - position.top - position.bottom) * aspectRatio);
+                            }
+                            else {
+                                position.right = width - (position.left + (height - position.top - position.bottom) * aspectRatio);
+                            }
+                        }
+                    }
+                    if (type == 'e' || type == 'se' || type == 'sw') {
+                        position.bottom = height - (position.top + (width - position.left - position.right) / aspectRatio);
+
+                        if (position.bottom < 0) {
+                            position.bottom = 0;
+
+                            if (type[0] == 'e' || type[1] == 'e') {
+                                position.right = width - (position.left + (height - position.top - position.bottom) * aspectRatio);
+                            }
+                            else {
+                                position.left = width - (position.right + (height - position.top - position.bottom) * aspectRatio);
+                            }
+                        }
+                    }
+                }
+
                 scope.$apply(function () {
                     updateRect(position, width, height);
                 });
@@ -350,6 +389,36 @@ app.directive('mrImageSelector', function(){
             function updateRect(position, width, height, apply) {
                 if (!position) {
                     return;
+                }
+
+                if (aspectRatio) {
+                    if (centerX > position.left) {
+                        position.left = width - (position.right + (height - position.top - position.bottom) * aspectRatio);
+                    }
+                    else {
+                        position.right = width - (position.left + (height - position.top - position.bottom) * aspectRatio);
+                    }
+
+                    if (position.top < 0) {
+                        position.top = 0;
+
+                        position.left = width - (position.right + (height - position.top - position.bottom) * aspectRatio);
+                    }
+                    if (position.bottom < 0) {
+                        position.bottom = 0;
+
+                        position.right = width - (position.left + (height - position.top - position.bottom) * aspectRatio);
+                    }
+                    if (position.left < 0) {
+                        position.left = 0;
+
+                        position.top = height - (position.bottom + (width - position.left - position.right) / aspectRatio);
+                    }
+                    if (position.right < 0) {
+                        position.right = 0;
+
+                        position.bottom = height - (position.top + (width - position.left - position.right) / aspectRatio);
+                    }
                 }
 
                 updateShadow(position, width, height);
