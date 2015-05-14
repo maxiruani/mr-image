@@ -32,6 +32,10 @@ app.directive('mrImageSelector', function(){
             var selector = scope.selector;
             var aspectRatio = scope.aspectRatio;
 
+            scope.$watch('aspectRatio', function (value) {
+                aspectRatio = value;
+            });
+
             var $document = angular.element(document);
 
             //
