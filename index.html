@@ -19,7 +19,8 @@
 
             $scope.image = {
                 src: 'assets/times.jpg',
-                maxWidth: 938
+                maxWidth: 938,
+                aspectRatio: 1.6
             };
 
             $scope.selector = {};
@@ -65,6 +66,19 @@
 
         }]);
 
+    </script>
+
+    <script>
+        // UI addition
+        app.directive('mrScrollBottom', function(){
+            return {
+                link: function(scope, element, attr) {
+                    element.on('click', function () {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    });
+                }
+            }
+        });
     </script>
 </head>
 <body>
@@ -132,8 +146,20 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" ng-click="addRect()" ng-disabled="selector.x1 == undefined">Add Rectangle</button>
-                        <button class="btn btn-info" ng-click="cropRect()" ng-disabled="selector.x1 == undefined">Crop Rectangle</button>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-block btn-primary" ng-click="addRect()" ng-disabled="selector.x1 == undefined">Add Rectangle</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="btn btn-block btn-info" ng-click="cropRect()" ng-disabled="selector.x1 == undefined" mr-scroll-bottom>Crop Rectangle</button>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group text-left margin-top">
+                                    <label class=""> Aspect Ratio: (Empty or invalid number set free)</label>
+                                    <input type="number" class="form-control" placeholder="Aspect Ratio" ng-model="image.aspectRatio">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -229,7 +255,7 @@
         </div>
 
 
-        <div mr-image mr-src="image.src" mr-max-width="image.maxWidth" mr-selector="selector" mr-drawer="drawer"></div>
+        <div mr-image mr-src="image.src" mr-max-width="image.maxWidth" mr-aspect-ratio="image.aspectRatio" mr-selector="selector" mr-drawer="drawer"></div>
 
         <div class="well well-sm text-center" style="margin-top: 20px">
             MR-IMAGE Demo page

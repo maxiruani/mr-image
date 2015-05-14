@@ -7,6 +7,10 @@ body {
     width: 970px !important;
 }
 
+.margin-top {
+    margin-top: 5px;
+}
+
 .demo-navbar-btn {
     margin: 10px 10px 0 0;
 }
