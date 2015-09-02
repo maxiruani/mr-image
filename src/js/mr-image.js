@@ -13,8 +13,10 @@ app.directive('mrImage', function() {
             selector: '=?mrSelector'
         },
         template:
-            '<div mr-image-selector mr-model="selector" mr-aspect-ratio="aspectRatio" style="height: {{scaleValue(height, scale) + \'px\'}}; width: {{scaleValue(width, scale) + \'px\'}}"></div>' +
-            '<div mr-image-drawer mr-model="drawer" style="height: {{scaleValue(height, scale) + \'px\'}}; width: {{scaleValue(width, scale) + \'px\'}}"></div>' +
+            '<div mr-image-selector mr-model="selector" mr-aspect-ratio="aspectRatio" ' + 
+            'ng-style="{ \'height\': scaleValuePx(height, scale), \'width\': scaleValuePx(width, scale) }"></div>' +
+            '<div mr-image-drawer mr-model="drawer" ' +
+            'ng-style="{ \'height\': scaleValuePx(height, scale), \'width\': scaleValuePx(width, scale) }"></div>' +
             '<img ng-src="{{src}}" width="{{scaleValue(width, scale)}}" height="{{scaleValue(height, scale)}}">',
 
         link: function (scope, element) {
@@ -46,6 +48,10 @@ app.directive('mrImage', function() {
 
             scope.scaleValue = function (value, scale) {
                 return Math.floor(value * scale);
+            };
+            
+            scope.scaleValuePx = function(value, scale) {
+                return Math.floor(value * scale) + 'px';
             };
         }
     };
