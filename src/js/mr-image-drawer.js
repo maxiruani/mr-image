@@ -6,22 +6,37 @@ app.directive('mrImageDrawer', function(){
         scope: {
             rects: '=mrModel'
         },
-        template: '<div ng-repeat="rect in rects" style="' +
-            'position: absolute;' +
-            'cursor: pointer;' +
-            'top:    {{ rect.y1 }}px;' +
-            'left:   {{ rect.x1 }}px;' +
-            'width:  {{ (rect.x2 - rect.x1)}}px;' +
-            'height: {{ (rect.y2 - rect.y1)}}px;' +
-            "border: {{ rect.stroke || 3 }}px solid {{ rect.color || '#F00' }};" +
-            "background-color: {{ increaseBrightness(rect.color || '#F00', '0.3') }}" +
-            '"' +
-            "ng-style='rectStyle'" +
-            "ng-mouseenter=\"rectStyle = { 'background-color': increaseBrightness(rect.color || '#F00', '0.1') }\"" +
-            "ng-mouseout=\"rectStyle =   { 'background-color': increaseBrightness(rect.color || '#F00', '0.3' ) }\"" +
-        '></div>',
+        template: '<div ng-repeat="rect in rects" ng-style="getRectStyle($index, rect)" ng-mouseenter="setPercent($index, 0.1)" ng-mouseout="setPercent($index, 0.3)"></div>',
         link: function(scope, element) {
-
+			scope.percentages = [];
+			
+			scope.getRectStyle = function (index, rect){
+				return {
+					position: 'absolute',
+					cursor: 'pointer',
+					top: rect.y1 + 'px', left: rect.x1+ 'px', width: (rect.x2 - rect.x1) + 'px', height: (rect.y2 - rect.y1) + 'px',
+					border: (rect.stroke || 3) + ' solid ' + (rect.color || '#F00'), 
+					backgroundColor: scope.increaseBrightness(rect.color || '#F00', scope.percentages[index])
+				}
+			}
+			
+			scope.setPercent = function (index, value){
+				if(!scope.percentages)
+					return;
+				
+				scope.percentages[index] = value;
+			}
+			
+			scope.$watch('rects', function(newVal, oldVal){
+				scope.percentages = [];
+				if(!newVal)
+					return;
+				
+				for(var i = 0; i < newVal.length; i++){
+					scope.percentages[i] = 0.3; 
+				}
+			}, true);
+			
             scope.increaseBrightness = function (hex, percent) {
                 // Strip the leading # if it's there
                 hex = hex.replace(/^\s*#|\s*$/g, '');
