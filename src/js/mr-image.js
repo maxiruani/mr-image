@@ -17,7 +17,7 @@ app.directive('mrImage', function() {
             'ng-style="{ \'height\': scaleValuePx(height, scale), \'width\': scaleValuePx(width, scale) }"></div>' +
             '<div mr-image-drawer mr-model="drawer" ' +
             'ng-style="{ \'height\': scaleValuePx(height, scale), \'width\': scaleValuePx(width, scale) }"></div>' +
-            '<img ng-src="{{src}}" width="{{scaleValue(width, scale)}}" height="{{scaleValue(height, scale)}}">',
+            '<img crossOrigin="Anonymous" ng-src="{{src}}" width="{{scaleValue(width, scale)}}" height="{{scaleValue(height, scale)}}">',
 
         link: function (scope, element) {
 
@@ -25,6 +25,7 @@ app.directive('mrImage', function() {
 
             function setImageSize(src) {
                 scope.image = new Image();
+                scope.image.crossOrigin = "anonymous";
                 scope.image.onload = function () {
                     scope.$apply(function () {
                         scope.height = scope.height || scope.image.height;
